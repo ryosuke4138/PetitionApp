@@ -1,0 +1,67 @@
+@hostname = 127.0.0.1
+@port = 4941
+@host = {{hostname}}:{{port}}
+@version = v1
+@contentType = application/json
+
+### GET /petitions
+# View petitions
+# By default, the petitions should be sorted by the number of signatures descending (highest to lowest). The list should be filtered, then sorted, then paginated using startIndex and count.
+curl -X GET "http://{{host}}/api/{{version}}/petitions" -H "accept: application/json"
+
+### referende server
+curl -X GET "http://csse-s365.canterbury.ac.nz:4001/api/v1/petitions" -H "accept: application/json"
+
+
+### GET /petitions
+# View petitions with parameters
+curl -X GET "http://{{host}}/api/{{version}}/petitions?startIndex=0&count=10&q=Increase%20the%20refugee%20quota&categoryId=5&authorId=4&sortBy=SIGNATURES_DESC" -H "accept: application/json"
+
+### referende server
+curl -X GET "http://csse-s365.canterbury.ac.nz:4001/api/v1/petitions?startIndex=0&count=10&q=Increase%20the%20education%20budget&categoryId=1&authorId=11&sortBy=SIGNATURES_DESC" -H "accept: application/json"
+
+
+### POST /petitions
+# Add a new petition.
+# The closing date closingDate must be in the future, and categoryId must reference an existing category.
+curl -X POST "http://{{host}}/api/{{version}}/petitions" -H "accept: application/json" -H "Content-Type: application/json" -d "{\"title\":\"Increase the education budget\",\"description\":\"Schools need more money.\",\"categoryId\":1,\"closingDate\":\"2012-04-23 18:25:43.511\"}"
+
+
+### GET /petitions/{id}
+# Retrieve detailed information about a petition
+curl -X GET "http://{{host}}/api/v1/petitions/2" -H "accept: application/json"
+
+### referende server
+curl -X GET "http://csse-s365.canterbury.ac.nz:4001/api/v1/petitions/2" -H "accept: application/json"
+
+
+### PATCH /petitions/{id}
+# Change a petition's details.
+# Only accessible to the author of the petition. The closing date closingDate must be in the future, and categoryId must reference an existing category. Not accessible after the petition has closed (i.e. the closing date is in the past).
+curl --location --request PATCH 'http://{{host}}/api/v1/petitions/13' \
+--header 'Content-Type: application/json' \
+--header 'X-Authorization: kGkP0CjlmU1pHLhmcafsOBs2eyBAdtlS' \
+--data-raw '{
+	"title": "Keep Hawkins Lab open",
+	"description": "They seem like cool people."
+}'
+
+### referende server
+curl --location --request PATCH 'http://csse-s365.canterbury.ac.nz:4001/api/v1/petitions/13' \
+--header 'Content-Type: application/json' \
+--header 'X-Authorization: kGkP0CjlmU1pHLhmcafsOBs2eyBAdtlS' \
+--data-raw '{
+	"title": "Keep Hawkins Lab open",
+	"description": "They seem like cool people."
+}'
+
+
+### GET /petitions/categories
+curl --location --request GET 'http://{{host}}/api/v1/petitions/categories'
+
+
+### GET /petitions/{id}/signatures
+curl -X GET "http://{{host}}/api/v1/petitions/1/signatures" -H "accept: application/json"
+
+### referende server
+curl -X GET "http://csse-s365.canterbury.ac.nz:4001/api/v1/petitions/1/signatures" -H "accept: application/json"

@@ -1,0 +1,20 @@
+@hostname = 127.0.0.1
+@port = 4941
+@host = {{hostname}}:{{port}}
+@version = v1
+@contentType = application/json
+
+###
+# Retrieve a user's profile photo.
+GET http://{{host}}/api/{{version}}/users/1/photo
+
+### reference server
+curl --location --request GET 'http://csse-s365.canterbury.ac.nz:4001/api/v1/users/3/photo'
+
+###
+# Set a user's profile photo.
+PUT http://{{host}}/api/{{version}}/users/1/photo
+
+###
+# Delete a user's profile photo
+DELETE http://{{host}}/api/{{version}}/users/134/photo

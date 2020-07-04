@@ -1,0 +1,13 @@
+@hostname = 127.0.0.1
+@port = 4941
+@host = {{hostname}}:{{port}}
+@version = v1
+@contentType = application/json
+
+###
+# Retrieve a petition's photo.
+GET http://{{host}}/api/{{version}}/petitions/134/photo
+
+###
+# Set a petition's photo.
+PUT http://{{host}}/api/{{version}}/petitions/134/photo

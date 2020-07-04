@@ -1,0 +1,51 @@
+@hostname = 127.0.0.1
+@port = 4941
+@host = {{hostname}}:{{port}}
+@version = v1
+@contentType = application/json
+
+###
+# Register as a new user.
+POST http://{{host}}/api/{{version}}/users/register
+Content-Type: {{contentType}}
+
+{
+  "name": "Adam Anderson",
+  "email": "aaa11@uclive.ac.nz",
+  "password": "letmein",
+  "city": "Christchurch",
+  "country": "New Zealand"
+}
+
+###
+# Log in as an existing user.
+POST http://{{host}}/api/{{version}}/users/login
+Content-Type: {{contentType}}
+
+{
+  "email": "aaa11@uclive.ac.nz",
+  "password": "letmein"
+}
+
+###
+# Log out the currently authorised user.
+POST http://{{host}}/api/{{version}}/users/logout
+
+
+###
+# Retrieve information about a user.
+GET http://{{host}}/api/{{version}}/users/1
+
+###
+# Change a user's details.
+PATCH http://{{host}}/api/{{version}}/users/11
+Content-Type: {{contentType}}
+
+{
+  "name": "Adam Anderson",
+  "email": "aaa11@uclive.ac.nz",
+  "password": "letmein",
+  "currentPassword": "letmein",
+  "city": "Christchurch",
+  "country": "New Zealand"
+}
