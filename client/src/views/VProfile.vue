@@ -7,9 +7,7 @@
       <ProfileCard />
     </v-row>
     <h1 :class="{ title: true }">My Petitions</h1>
-    <h3 v-if="!petitions.length" :class="{ alert: true }">
-      No Petitions Registered..
-    </h3>
+    <h3 v-if="!petitions.length" :class="{ alert: true }">No Petitions Registered..</h3>
     <v-row align="center">
       <PetitionCard
         v-for="(petition, i) in petitions"

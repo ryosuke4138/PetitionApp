@@ -7,9 +7,7 @@
       :key="'PetitionCard' + index"
     ></v-img>
     <v-card-title class="cardTitle">{{ petition.title }}</v-card-title>
-    <v-card-subtitle class="pb-0"
-      >Signature Count: {{ petition.signatureCount }}</v-card-subtitle
-    >
+    <v-card-subtitle class="pb-0">Signature Count: {{ petition.signatureCount }}</v-card-subtitle>
     <v-card-text class="text--primary">
       <div>{{ petition.category }}</div>
       <div>Created by {{ petition.authorName }}</div>

@@ -1,16 +1,20 @@
 <template>
   <v-app>
-    <!-- <NavBar /> -->
-    <h1>Petition Application</h1>
-    <!-- <PetitionCreateDialog />
+    <NavBar />
+    <PetitionCreateDialog />
     <PetitionSearchCard :default-params="params" />
-    <PetitionCard
-      v-for="(petition, i) in slicedPetition"
-      :key="'VHome' + i"
-      :petition="petition"
-      :target-petition-id.sync="targetPetitionId"
-    />
-    <PaginationButton />-->
+    <v-container fluid>
+      <v-row>
+        <PetitionCard
+          class="petitionCard"
+          v-for="(petition, i) in slicedPetition"
+          :key="'VHome' + i"
+          :petition="petition"
+          :target-petition-id.sync="targetPetitionId"
+        />
+      </v-row>
+    </v-container>
+    <PaginationButton />
   </v-app>
 </template>
 
@@ -54,14 +58,14 @@ export default class extends Vue {
   }
 
   // only 10 petitions should be appeared in the page
-  private slicedPetition() {
+  private get slicedPetition() {
     const startIndex = (this.page - 1) * 10;
     return this.petitions.slice(startIndex, startIndex + 10);
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 v-row {
   margin-left: 5px;
   margin-left: 5px;
@@ -69,5 +73,8 @@ v-row {
 .pagination {
   margin-left: auto;
   margin-right: auto;
+}
+.petitionCard {
+  margin: 8px;
 }
 </style>

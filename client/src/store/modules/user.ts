@@ -35,13 +35,13 @@ export interface UserInterface {
   isLoading: boolean;
 }
 
-@Module({ dynamic: true, store, name: "petition" })
+@Module({ dynamic: true, store, name: "user" })
 class User extends VuexModule implements UserInterface {
-  public user: UserState = initialUserState;
-  public signatories: SignatoryState[] = [];
-  public isAuthenticated = !!JwtService.getToken();
-  public isLoading = false;
-  public errors = "";
+  user: UserState = initialUserState;
+  signatories: SignatoryState[] = [];
+  isAuthenticated = !!JwtService.getToken();
+  isLoading = false;
+  errors = "";
 
   @Mutation
   private SET_IS_LOADING(bool: boolean) {
@@ -111,6 +111,7 @@ class User extends VuexModule implements UserInterface {
     }
   }
 
+  @Action
   public async FETCH_USER(userId: number) {
     try {
       ApiService.setHeader();
@@ -123,6 +124,7 @@ class User extends VuexModule implements UserInterface {
     }
   }
 
+  @Action
   public async UPDATE_USER(
     userId: number,
     userInfo: Partial<UserState>
@@ -134,15 +136,18 @@ class User extends VuexModule implements UserInterface {
     this.SET_USER(data);
   }
 
+  @Action
   public async FETCH_USER_PHOTO(userId: number) {
     ApiService.setHeader();
     return await UserService.getPhoto(userId);
   }
 
+  @Action
   public RESET_ERROR() {
     this.SET_ERROR("");
   }
 
+  @Action
   public async PUT_USER_PHOTO(userInfo: {
     userId: number;
     image: Blob;
@@ -158,6 +163,7 @@ class User extends VuexModule implements UserInterface {
     this.SET_IS_USER_LOADING(false);
   }
 
+  @Action
   public async DELETE_USER_PHOTO(userId: number) {
     ApiService.setHeader();
     this.SET_IS_USER_LOADING(true);

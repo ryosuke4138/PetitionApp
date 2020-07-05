@@ -39,7 +39,7 @@ import {
   ParametersState
 } from "../../store/modules/home";
 
-@Component({ name: "vhome" })
+@Component({ name: "petitionSearchCard" })
 export default class extends Vue {
   @Prop({ required: true }) private defaultParams!: {
     q: string;

@@ -9,11 +9,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import { UserModule } from "../../store/modules/user";
 import { HomeModule } from "../../store/modules/home";
 
-@Component({ name: "logoutButton" })
+@Component({ name: "pagenationButton" })
 export default class extends Vue {
   private NUM_PER_PAGE = 10;
   private pageNumber = 1;
@@ -25,6 +25,11 @@ export default class extends Vue {
 
   private get page() {
     return HomeModule.page;
+  }
+
+  @Watch("pageNumber")
+  private watchPageNumber(val: number) {
+    HomeModule.SET_PAGE(val);
   }
 
   public logout() {

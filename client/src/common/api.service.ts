@@ -6,7 +6,6 @@ import API_URL from "@/common/config";
 
 const ApiService = {
   init() {
-    console.log("init");
     Vue.use(VueAxios, axios);
     Vue.axios.defaults.baseURL = API_URL;
   },
@@ -24,7 +23,6 @@ const ApiService = {
   },
 
   get(resource: string) {
-    console.log(Vue.axios);
     return Vue.axios.get(resource).catch((error) => {
       throw new Error(`ApiService ${error}`);
     });
