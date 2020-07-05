@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import store from "@/store/index.ts";
+import { UserModule } from "@/store/modules/user";
 
 Vue.use(VueRouter);
 
@@ -8,29 +8,29 @@ const routes: Array<RouteConfig> = [
   {
     path: "/",
     name: "home",
-    component: () => import("@/views/VHome.vue")
+    component: () => import("@/views/VHome.vue"),
   },
   {
     name: "profile",
-    path: "/user/:username",
-    component: () => import("@/views/VProfile.vue")
+    path: "/profile",
+    component: () => import("@/views/VProfile.vue"),
   },
   {
     name: "petition",
     path: "/petition/:slug",
-    component: () => import("@/views/VPetition.vue")
-  }
+    component: () => import("@/views/VPetition.vue"),
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
 
 router.beforeEach((to, from, next) => {
   console.log("start routing to " + to.path);
-  const isAuthenticated = store.getters.isAuthenticated;
+  const isAuthenticated = UserModule.isAuthenticated;
   console.log("isAuthenticated: " + isAuthenticated);
 
   const isGoToAuthPage = to.path == "/register" || to.path == "/login";

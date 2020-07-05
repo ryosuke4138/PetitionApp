@@ -3,19 +3,11 @@
     <v-app-bar :fixed="true" max-height="64px">
       <TitleButton />
       <v-spacer></v-spacer>
-      <v-btn v-if="!isAuthenticated" @click="showLoginDialog = true"
-        >Login</v-btn
-      >
-      <v-btn v-if="!isAuthenticated" @click="showRegisterDialog = true"
-        >Register</v-btn
-      >
-      <router-link
-        :class="button"
-        :to="{ name: 'profile', params: { username: user.name } }"
-      >
-        <v-btn v-if="isAuthenticated"> Profile</v-btn>
+      <v-btn class="loginButton" v-if="!isAuthenticated" @click="showLoginDialog = true">Login</v-btn>
+      <v-btn v-if="!isAuthenticated" @click="showRegisterDialog = true">Register</v-btn>
+      <router-link class="button" :to="{ name: 'profile' }">
+        <v-btn v-if="isAuthenticated">Profile</v-btn>
       </router-link>
-
       <LogoutButton v-if="isAuthenticated" />
     </v-app-bar>
     <LoginDialog :show.sync="showLoginDialog" />
@@ -32,7 +24,7 @@ import TitleButton from "@/components/ui/TitleButton.vue";
 import { UserModule } from "../store/modules/user";
 
 @Component({
-  name: "vprofile",
+  name: "navBar",
   components: {
     LogoutButton,
     TitleButton,
@@ -51,15 +43,20 @@ export default class extends Vue {
   get user() {
     return UserModule.user;
   }
-
-  button() {
-    return { "no-under-line": true };
-  }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .no-under-line {
   text-decoration: none;
+  text-shadow: 1;
+}
+
+.loginButton {
+  margin-right: 5px;
+}
+
+.button {
+  text-decoration: false;
 }
 </style>

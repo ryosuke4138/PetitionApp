@@ -3,7 +3,7 @@ import {
   Module,
   Mutation,
   Action,
-  getModule
+  getModule,
 } from "vuex-module-decorators";
 import store from "@/store";
 import { PetitionsService, SignaturesService } from "@/common/api.service";
@@ -48,7 +48,7 @@ const initialPetitionState: PetitionState = {
   authorCity: "",
   authorCountry: "",
   createdDate: "",
-  closingDate: ""
+  closingDate: "",
 };
 
 @Module({ dynamic: true, store, name: "petition" })
@@ -63,18 +63,22 @@ class Petition extends VuexModule implements UserPetitionState {
     this.isLoading = bool;
   }
 
+  @Mutation
   private SET_PETITION(petition: PetitionState) {
     this.petition = petition;
   }
 
+  @Mutation
   private SET_SIGNATORIES(signatories: SignatoryState[]) {
     this.signatories = signatories;
   }
 
+  @Mutation
   private RESET() {
     this.petition = initialPetitionState;
   }
 
+  @Mutation
   private SET_IS_SIGNED(bool: boolean) {
     this.isSigned = bool;
   }
@@ -85,11 +89,13 @@ class Petition extends VuexModule implements UserPetitionState {
     return `${year}-${month}-${day}`;
   }
 
+  @Action
   private formatDate(date: string): string {
     if (!date) return "";
     return this.slashToHyphen(new Date(date).toLocaleString());
   }
 
+  @Action
   private formatDisplayDate(createdDate: string, closingDate: string): string {
     if (closingDate) {
       return createdDate + " - " + closingDate;
@@ -98,6 +104,7 @@ class Petition extends VuexModule implements UserPetitionState {
     }
   }
 
+  @Action
   public async FETCH_PETITION(slug: number) {
     ApiService.setHeader();
     const { data } = await PetitionsService.get(slug);
@@ -111,11 +118,13 @@ class Petition extends VuexModule implements UserPetitionState {
     return data;
   }
 
+  @Action
   public async DELETE_PETITION(slug: number) {
     ApiService.setHeader();
     await PetitionsService.destroy(slug);
   }
 
+  @Action
   public async UPDATE_PETITION(d: {
     petitionId: number;
     newPetition: PetitionState;
@@ -132,15 +141,18 @@ class Petition extends VuexModule implements UserPetitionState {
     this.SET_PETITION(data);
   }
 
+  @Action
   public RESET_PETITION() {
     this.RESET();
   }
 
+  @Action
   public async PUBLISH_PETITION(params: object) {
     ApiService.setHeader();
     return await PetitionsService.create(params);
   }
 
+  @Action
   public async PUT_PETITION_PHOTO(data: {
     petitionId: number;
     image: Blob;
@@ -156,6 +168,7 @@ class Petition extends VuexModule implements UserPetitionState {
     this.SET_IS_LOADING(false);
   }
 
+  @Action
   public async FETCH_SIGNATURES(slug: number) {
     ApiService.setHeader();
     const { data } = await SignaturesService.get(slug);
@@ -163,12 +176,14 @@ class Petition extends VuexModule implements UserPetitionState {
     return data;
   }
 
+  @Action
   public async SIGN_PETITION(slug: number) {
     ApiService.setHeader();
     await SignaturesService.sign(slug);
     this.SET_IS_SIGNED(true);
   }
 
+  @Action
   public async UNSIGN_PETITION(slug: number) {
     ApiService.setHeader();
     await SignaturesService.unsign(slug);

@@ -17,19 +17,19 @@ const ApiService = {
   },
 
   query(resource: string, params: object) {
-    return Vue.axios.get(resource, params).catch(error => {
+    return Vue.axios.get(resource, params).catch((error) => {
       throw new Error(`ApiService ${error}`);
     });
   },
 
   get(resource: string) {
-    return Vue.axios.get(resource).catch(error => {
+    return Vue.axios.get(resource).catch((error) => {
       throw new Error(`ApiService ${error}`);
     });
   },
 
   getOne(resource: string, slug: number) {
-    return Vue.axios.get(`${resource}/${slug}`).catch(error => {
+    return Vue.axios.get(`${resource}/${slug}`).catch((error) => {
       throw new Error(`ApiService ${error}`);
     });
   },
@@ -60,16 +60,16 @@ const ApiService = {
   },
 
   getSignatures(slug: number) {
-    return Vue.axios.get(`petitions/${slug}/signatures`).catch(error => {
+    return Vue.axios.get(`petitions/${slug}/signatures`).catch((error) => {
       throw new Error(`ApiService ${error}`);
     });
-  }
+  },
 };
 
 export default ApiService;
 
 export const PetitionsService = {
-  query(q: object) {
+  query(q?: object) {
     if (q) {
       return ApiService.query("petitions", { params: q });
     } else {
@@ -99,7 +99,7 @@ export const PetitionsService = {
 
   updatePhoto(slug: number, image: Blob, imageType: string) {
     return ApiService.putPhoto(`petitions/${slug}/photo`, image, imageType);
-  }
+  },
 };
 
 export const SignaturesService = {
@@ -113,7 +113,7 @@ export const SignaturesService = {
 
   unsign(slug: number) {
     return ApiService.delete(`petitions/${slug}/signatures`);
-  }
+  },
 };
 
 export const UserService = {
@@ -143,5 +143,5 @@ export const UserService = {
 
   deletePhoto(slug: number) {
     return ApiService.delete(`users/${slug}/photo`);
-  }
+  },
 };
