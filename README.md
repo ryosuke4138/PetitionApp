@@ -42,11 +42,14 @@ This is a sample project for developers interested in...
 - Server
 
   - Node.js
+  - Express (a Node.js web application framework)
   - Jest (a JavaScript Testing Framework with a focus on simplicity)
+  - Nginx
 
 - Database
 
   - MySQL
+  - phpMyAdmin (a database manager)
 
 - CI / CD
   - Docker / Docker-compose

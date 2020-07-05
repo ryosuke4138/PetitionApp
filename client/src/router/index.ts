@@ -8,24 +8,24 @@ const routes: Array<RouteConfig> = [
   {
     path: "/",
     name: "home",
-    component: () => import("@/views/VHome.vue")
+    component: () => import("@/views/VHome.vue"),
   },
   {
     name: "profile",
     path: "/user/:username",
-    component: () => import("@/views/VProfile.vue")
+    component: () => import("@/views/VProfile.vue"),
   },
   {
     name: "petition",
     path: "/petition/:slug",
-    component: () => import("@/views/VPetition.vue")
-  }
+    component: () => import("@/views/VPetition.vue"),
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
 
 router.beforeEach((to, from, next) => {

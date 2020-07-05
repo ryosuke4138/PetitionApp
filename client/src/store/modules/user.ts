@@ -3,7 +3,7 @@ import {
   Module,
   Mutation,
   Action,
-  getModule
+  getModule,
 } from "vuex-module-decorators";
 import store from "@/store";
 import JwtService from "@/common/jwt.service";
@@ -26,7 +26,7 @@ const initialUserState: UserState = {
   name: "",
   email: "",
   city: "",
-  country: ""
+  country: "",
 };
 
 export interface UserInterface {
@@ -48,24 +48,29 @@ class User extends VuexModule implements UserInterface {
     this.isLoading = bool;
   }
 
+  @Mutation
   private SET_IS_USER_LOADING(val: boolean) {
     this.isLoading = val;
   }
 
+  @Mutation
   private SET_USER(user: UserState) {
     this.user = user;
   }
 
+  @Mutation
   private SET_ERROR(errors: string) {
     this.errors = errors;
   }
 
+  @Mutation
   private SET_AUTH(token: string) {
     this.isAuthenticated = true;
     this.errors = "";
     JwtService.saveToken(token);
   }
 
+  @Mutation
   private PURGE_AUTH() {
     this.isAuthenticated = false;
     this.user = initialUserState;
@@ -73,7 +78,7 @@ class User extends VuexModule implements UserInterface {
     JwtService.destroyToken();
   }
 
-  @Action
+  @Action({ rawError: true })
   public async LOGIN(credentials: object) {
     try {
       const { data } = await UserService.login(credentials);
@@ -89,10 +94,12 @@ class User extends VuexModule implements UserInterface {
     }
   }
 
+  @Action
   public LOGOUT() {
     this.PURGE_AUTH();
   }
 
+  @Action
   public async REGISTER(credentials: object) {
     try {
       const { data } = await UserService.register(credentials);

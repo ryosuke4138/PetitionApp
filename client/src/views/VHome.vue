@@ -1,19 +1,16 @@
 <template>
   <v-app>
-    <NavBar />
-    <PetitionCreateDialog />
+    <!-- <NavBar /> -->
+    <h1>Petition Application</h1>
+    <!-- <PetitionCreateDialog />
     <PetitionSearchCard :default-params="params" />
-    <v-row align="center">
-      <PetitionCard
-        v-for="(petition, i) in slicedPetition"
-        :key="'VHome' + i"
-        :petition="petition"
-        :target-petition-id.sync="targetPetitionId"
-      />
-    </v-row>
-    <v-row class="pagination">
-      <PaginationButton />
-    </v-row>
+    <PetitionCard
+      v-for="(petition, i) in slicedPetition"
+      :key="'VHome' + i"
+      :petition="petition"
+      :target-petition-id.sync="targetPetitionId"
+    />
+    <PaginationButton />-->
   </v-app>
 </template>
 
