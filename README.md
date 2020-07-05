@@ -69,7 +69,9 @@ This project is intended to be used on Linux or Mac OS X (Windows is not confirm
 
 ## Screenshots
 
-not yet..
+<p align="left">
+  <img width="500" src="public/image/screenshot.png">
+</p>
 
 ## Usage
 
